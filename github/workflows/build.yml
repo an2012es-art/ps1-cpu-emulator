@@ -1,0 +1,15 @@
+name: Build
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile
+        run: g++ -O2 -std=c++17 ps1cpu.cpp -o ps1cpu
+      - name: Run
+        run: ./ps1cpu
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ps1cpu-linux
+          path: ps1cpu
